@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class WelcomeService {
 
   private static final Logger log = LoggerFactory.getLogger(WelcomeService.class);
+
   @Value("${environment.name}")
   private String environmentName;
 
