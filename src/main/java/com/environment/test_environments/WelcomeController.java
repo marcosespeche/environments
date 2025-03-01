@@ -12,7 +12,7 @@ public class WelcomeController {
 
   @Autowired private WelcomeService service;
 
-  @GetMapping(path = "/")
+  @GetMapping(path = "")
   public ResponseEntity<String> getWelcome() throws InterruptedException {
 
     String response = service.getWelcome();

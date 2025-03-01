@@ -1,4 +1,4 @@
-name: CI Java (Spring Boot) con Gradle - Main
+name: CI/CD Java (Spring Boot) en Azure
 
 on:
   pull_request:
@@ -11,8 +11,9 @@ env:
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
-    name: Deploy to Production
+    name: Deploy to Azure
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,14 +25,14 @@ jobs:
           distribution: 'temurin'
 
       - name: Configurar Gradle
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/actions/setup-gradle@v3
 
-      - name: Build Gradle
-        run: ./gradlew build
+      - name: Build con Gradle
+        run: ./gradlew build -x test
 
-      # Aquí puedes agregar la lógica de despliegue cuando estés listo
-      # - name: Deploy to Render
-      #   run: |
-      #     curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_ID }}/deploys \
-      #       -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
-      #       -H "Content-Type: application/json" \
+      - name: Deploy a Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "testing-environments"
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: build/libs/*.jar

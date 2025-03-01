@@ -23,6 +23,6 @@ public class WelcomeService {
 
     log.info("ENVIRONMENT NAME: {}", environmentName);
 
-    return "Hello, world!";
+    return "Hello, you are currently in a " + environmentName + " environment!";
   }
 }
