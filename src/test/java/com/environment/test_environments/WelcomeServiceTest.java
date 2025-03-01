@@ -12,7 +12,8 @@ class WelcomeServiceTest {
 
   @Autowired private WelcomeService service;
 
-  @Value("${environment.name}") private String environmentName;
+  @Value("${environment.name}")
+  private String environmentName;
 
   @Test
   void getWelcome() throws InterruptedException {
