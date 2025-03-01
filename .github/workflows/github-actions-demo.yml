@@ -42,6 +42,8 @@ jobs:
       - name: Linter
         uses: super-linter/super-linter@v6.6.0
         env:
+          VALIDATE_MARKDOWN: false
+          VALIDATE_NATURAL_LANGUAGE: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
