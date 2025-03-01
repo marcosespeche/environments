@@ -1,0 +1,34 @@
+name: CI Java (Spring Boot) con Gradle - Main
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    types: [ closed ]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+
+      - name: Build Gradle
+        run: ./gradlew build
+
+      # Aquí puedes agregar la lógica de despliegue cuando estés listo
+      # - name: Deploy to Render
+      #   run: |
+      #     curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_ID }}/deploys \
+      #       -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
+      #       -H "Content-Type: application/json" \
