@@ -7,6 +7,7 @@ on:
 
 env:
   SPRING_PROFILE_ACTIONS: prod
+  SECRET_ENV_NAME: ${{ secrets.SECRET_ENV_NAME }}
 
 jobs:
   deploy:
