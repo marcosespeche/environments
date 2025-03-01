@@ -11,6 +11,7 @@ env:
 jobs:
   deploy:
     if: github.event.pull_request.merged == true
+    environment: production
     name: Deploy to Azure
     runs-on: ubuntu-latest
 
