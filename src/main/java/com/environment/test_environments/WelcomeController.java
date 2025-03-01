@@ -15,7 +15,9 @@ public class WelcomeController {
 
     @GetMapping(path = "/")
     public ResponseEntity<String> getWelcome () throws InterruptedException {
+
         String response = service.getWelcome();
+        
         return ResponseEntity.ok(response);
     }
 }
