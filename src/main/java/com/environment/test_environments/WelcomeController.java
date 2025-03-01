@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/welcome")
 public class WelcomeController {
 
-    @Autowired
-    private WelcomeService service;
+  @Autowired private WelcomeService service;
 
-    @GetMapping(path = "/")
-    public ResponseEntity<String> getWelcome () throws InterruptedException {
-        String response = service.getWelcome();
-        return ResponseEntity.ok(response);
-    }
+  @GetMapping(path = "/")
+  public ResponseEntity<String> getWelcome() throws InterruptedException {
+    String response = service.getWelcome();
+    return ResponseEntity.ok(response);
+  }
 }
